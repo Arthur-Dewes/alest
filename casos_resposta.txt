@@ -1,38 +1,38 @@
 n = 71
-len = 1320
+count_to_repeat = 5559129
 
 n = 81
-len = 1320
+count_to_repeat = 11741729
 
 n = 91
-len = 180
+count_to_repeat = 17687669
 
 n = 101
-len = 2520
+count_to_repeat = 56258201
 
 n = 111
-len = 1980
+count_to_repeat = 135605469
 
 n = 121
-len = 27720
+count_to_repeat = 
 
 n = 131
-len = 3960
+count_to_repeat =
 
 n = 141
-len = 9240
+count_to_repeat = 
 
 n = 151
-len = 1980
+count_to_repeat = 
 
 n = 161
-len = 27720
+count_to_repeat = 
 
 n = 171
-len = 2520
+count_to_repeat = 
 
 n = 181
-len = 27720
+count_to_repeat = 
 
 n = 191
-len = 27720
+count_to_repeat = 

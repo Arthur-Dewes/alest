@@ -1,0 +1,53 @@
+Código inicial resolve apenas o primeiro caso (vetor de tamanho 71) devido ao uso de memoria que para valores maiores de n excede a memoria.
+Funciona de modo que armazena todo array gerado junto de um contador em um dicionário e verifica se houve repetição.
+
+Pseudo Código:
+
+Definir n como 71
+Definir arr como a lista de valores fornecida
+
+Função troca(tupla, pos, n):
+    Criar uma nova tupla onde cada elemento é posicionado conforme a lista 'pos'
+    Retornar a nova tupla
+
+Função danca(arr, n):
+    Criar um dicionário vazio chamado memo
+    Definir chave como arr
+    Enquanto verdadeiro:
+        Atualizar chave para a troca da chave atual com base em arr e n
+        
+        Se chave está presente em memo:
+            Incrementar memo[chave] em 1
+        Caso contrário:
+            Adicionar chave em memo com valor 1
+
+        Se memo[chave] for maior que 1:
+            Retornar o tamanho de memo
+
+Início do programa:
+    Imprimir o resultado de danca(arr, n)
+
+Código em python:
+
+n = 71
+arr = [58, 20, 65, 9, 25, 63, 53, 12, 55, 52, 14, 27, 54, 48, 17, 56, 21, 70, 22, 36, 43, 67, 37, 7, 40, 62, 3, 47, 32, 44, 26, 45, 33, 8, 39, 24, 50, 49, 60, 34, 0, 19, 29, 28, 64, 1, 31, 16, 41, 6, 46, 5, 51, 10, 38, 13, 68, 2, 35, 4, 15, 18, 11, 61, 23, 30, 57, 69, 42, 59, 66]
+
+def troca(tup: tuple[int], pos: list[int], n):
+    return tuple(tup[pos[i]] for i in range(n))
+
+def danca(arr, n):
+    chave = arr
+    memo = {}
+    while True:
+        chave = troca(chave, arr, n)
+        
+        if chave in memo.keys():
+            memo[chave] += 1
+        elif chave not in memo.keys():
+            memo[chave] = 1
+
+        if memo[chave] > 1:
+            return len(memo)
+
+if __name__ == '__main__':
+    print(danca(arr, n))

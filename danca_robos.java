@@ -1,41 +1,33 @@
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Arrays;
 
 public class danca_robos {
-    static int n = 191;
-    static int[] arr = {190, 151, 189, 31, 129, 101, 121, 118, 66, 183, 145, 99, 49, 153, 71, 43, 67, 44, 177, 15, 1, 75, 69, 82, 45, 37, 42, 150, 38, 135, 27, 4, 78, 11, 8, 65, 173, 33, 174, 168, 79, 172, 157, 170, 83, 21, 111, 34, 102, 20, 70, 137, 103, 161, 127, 119, 5, 24, 114, 125, 48, 122, 85, 160, 72, 58, 109, 106, 81, 184, 52, 156, 110, 152, 88, 108, 126, 113, 91, 63, 51, 120, 154, 143, 57, 140, 181, 90, 182, 158, 86, 29, 3, 16, 54, 171, 12, 149, 128, 25, 40, 32, 188, 167, 17, 39, 166, 116, 186, 117, 133, 179, 155, 0, 148, 105, 59, 87, 123, 28, 23, 89, 104, 165, 180, 22, 178, 26, 175, 56, 2, 139, 19, 46, 107, 92, 147, 96, 76, 55, 47, 130, 6, 35, 134, 7, 95, 141, 136, 13, 98, 10, 53, 77, 80, 185, 132, 100, 14, 61, 94, 115, 187, 93, 144, 84, 9, 36, 138, 64, 162, 30, 169, 176, 50, 164, 97, 18, 159, 62, 60, 41, 124, 74, 146, 142, 68, 131, 163, 73, 112};
-    static HashMap<String, Integer> memo = new HashMap<>();
+    private static Map<String, Integer> memo = new HashMap<>();
+    private static final int n = 81;
+    private static final int[] arr = {5, 9, 42, 8, 21, 79, 34, 67, 31, 15, 43, 37, 63, 73, 40, 16, 72, 25, 80, 51, 3, 12, 30, 20, 60, 62, 78, 19, 6, 14, 57, 45, 48, 58, 52, 44, 28, 11, 36, 61, 54, 2, 50, 55, 71, 77, 0, 64, 1, 18, 39, 46, 23, 65, 56, 74, 53, 22, 7, 41, 47, 59, 27, 69, 38, 35, 70, 76, 32, 4, 68, 13, 75, 10, 33, 66, 26, 24, 29, 49, 17};
     
-    static int[] troca(int[] array, int n) {
-        int[] newArray = new int[n];
+    public static int[] troca(int[] tup, int[] pos, int n) {
+        int[] result = new int[n];
         for (int i = 0; i < n; i++) {
-            newArray[i] = array[array[i]];
+            result[i] = tup[pos[i]];
         }
-        return newArray;
+        return result;
     }
     
-    static boolean check(String key) {
-        if (memo.containsKey(key) && memo.get(key) > 1) {
-            return true;
-        }
-        return false;
-    }
-    
-    static int danca(int[] arr, int n) {
-        String chave = Arrays.toString(arr);
-        int[] arrayAtual = arr.clone();
-        
+    public static int danca(int[] arr, int n) {
+        int[] chave = arr.clone();
         while (true) {
-            arrayAtual = troca(arrayAtual, n);
-            chave = Arrays.toString(arrayAtual);
+            chave = troca(chave, arr, n);
+            String chaveStr = Arrays.toString(chave);
             
-            if (memo.containsKey(chave)) {
-                memo.put(chave, memo.get(chave) + 1);
+            if (memo.containsKey(chaveStr)) {
+                memo.put(chaveStr, memo.get(chaveStr) + 1);
             } else {
-                memo.put(chave, 1);
+                memo.put(chaveStr, 1);
             }
             
-            if (check(chave)) {
+            if (memo.get(chaveStr) > 1) {
                 return memo.size();
             }
         }
