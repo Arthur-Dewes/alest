@@ -1,31 +1,50 @@
+O problema se desenvolve, de modo que, dado um vetor de tamanho n que contém os indices de ordenação, cada valor na posição i indica o índice de um segundo vetor (também de tamanho n e ordenado). O valor nesse índice do segundo vetor deve ser armazenado de volta na posição i do primeiro vetor. Esse processo se repete até que um vetor se repita.
+O vetor de indices é o primeiro que repete.
+
+Visualização:
+-; [0,1,2,3,4,5,6]; vetor de tamanho n ordenado.
+-; [5,6,0,4,2,3,1]; vetor de indices de ordenação.
+1; [3,1,5,2,0,4,6]; 
+2; [4,6,3,0,5,2,1]; 
+3; [2,1,4,5,3,0,6]; 
+4; [0,6,2,3,4,5,1]; 
+5; [5,1,0,4,2,3,6]; 
+6; [3,6,5,2,0,4,1]; 
+7; [4,1,3,0,5,2,6]; 
+8; [2,6,4,5,3,0,1]; 
+9; [0,1,2,3,4,5,6]; 
+10; [5,6,0,4,2,3,1]; repetição.
+
 Código inicial resolve apenas o primeiro caso (vetor de tamanho 71) devido ao uso de memoria que para valores maiores de n excede a memoria.
 Funciona de modo que armazena todo array gerado junto de um contador em um dicionário e verifica se houve repetição.
 
 Pseudo Código:
 
-Definir n como 71
-Definir arr como a lista de valores fornecida
-
-Função troca(tupla, pos, n):
-    Criar uma nova tupla onde cada elemento é posicionado conforme a lista 'pos'
-    Retornar a nova tupla
+Função troca(tup, pos, n):
+    resultado: lista de inteiros vazia de mesmo tamanho que tup
+    Para i de 0 até n-1:
+        Adicionar tup[pos[i]] ao resultado
+    Retornar uma tupla do resultado
 
 Função danca(arr, n):
-    Criar um dicionário vazio chamado memo
-    Definir chave como arr
+    chave ← arr
+    memo: hashmap
+    
     Enquanto verdadeiro:
-        Atualizar chave para a troca da chave atual com base em arr e n
+        chave ← troca(chave, arr, n)
         
-        Se chave está presente em memo:
-            Incrementar memo[chave] em 1
-        Caso contrário:
-            Adicionar chave em memo com valor 1
+        Se chave está nas chaves de memo:
+            memo[chave] ← memo[chave] + 1
+        Senão:
+            memo[chave] ← 1
+        
+        Se memo[chave] > 1:
+            Retornar tamanho de memo
 
-        Se memo[chave] for maior que 1:
-            Retornar o tamanho de memo
-
-Início do programa:
-    Imprimir o resultado de danca(arr, n)
+Programa principal:
+    arr: lista de inteiros
+    n: inteiro
+    Imprimir danca(arr, n)
 
 Código em python:
 
@@ -48,6 +67,66 @@ def danca(arr, n):
 
         if memo[chave] > 1:
             return len(memo)
+
+if __name__ == '__main__':
+    print(danca(arr, n))
+
+
+Segundo código, funcionou para todos casos testados (n de 71 até 121), mas é um algoritmo lento que toma muito tempo.
+
+Pseudocódigo:
+
+Função troca(tup, pos, n):
+    resultado ← novo array de tamanho n
+    Para i de 0 até n-1:
+        resultado[i] ← tup[pos[i]]
+    Retornar resultado
+
+Função dança(arr, n):
+    chave ← arr
+    memo: hasmmap
+    memo[arr] ← 1
+    contador ← 1
+    
+    Enquanto verdadeiro:
+        chave ← troca(chave, arr, n)
+        
+        Se chave está em memo:
+            memo[chave] ← memo[chave] + 1
+            
+            Se memo[chave] > 1:
+                Retornar contador
+        Senão:
+            memo[chave] ← 1
+            
+        contador ← contador + 1
+
+Programa principal:
+    arr: lista de inteiros
+    n: inteiro
+    Imprimir danca(arr, n)
+
+Código em Python:
+
+n = 71
+arr = [58, 20, 65, 9, 25, 63, 53, 12, 55, 52, 14, 27, 54, 48, 17, 56, 21, 70, 22, 36, 43, 67, 37, 7, 40, 62, 3, 47, 32, 44, 26, 45, 33, 8, 39, 24, 50, 49, 60, 34, 0, 19, 29, 28, 64, 1, 31, 16, 41, 6, 46, 5, 51, 10, 38, 13, 68, 2, 35, 4, 15, 18, 11, 61, 23, 30, 57, 69, 42, 59, 66]
+
+def troca(tup: tuple[int], pos: list[int], n):
+    return tuple(tup[pos[i]] for i in range(n))
+        
+def danca(arr, n):
+    chave = arr
+    memo = {tuple(arr): 1}
+    count = 1
+
+    while True:
+        chave = troca(chave, arr, n)
+        
+        if chave in memo:
+            memo[chave] += 1
+            if memo[chave] > 1:
+                return count
+        count += 1
 
 if __name__ == '__main__':
     print(danca(arr, n))
