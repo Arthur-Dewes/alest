@@ -1,8 +1,9 @@
-O problema se desenvolve, de modo que, dado um vetor de tamanho n que contém os indices de ordenação, cada valor na posição i indica o índice de um segundo vetor (também de tamanho n e ordenado). O valor nesse índice do segundo vetor deve ser armazenado de volta na posição i do primeiro vetor. Esse processo se repete até que um vetor se repita.
-O vetor de indices é o primeiro que repete.
+O problema se desenvolve, de modo que, dado um vetor de tamanho n que contém os 
+indices de ordenação, cada valor na posição i desse mesmo vetor indica o índice de troca para a ordenação.
+O valor nesse índice deve ser armazenado de volta na posição i do primeiro vetor. Esse processo se repete até que um vetor se repita.
+O vetor de indices fornecido é o primeiro que repete.
 
 Visualização:
--; [0,1,2,3,4,5,6]; vetor de tamanho n ordenado.
 -; [5,6,0,4,2,3,1]; vetor de indices de ordenação.
 1; [3,1,5,2,0,4,6]; 
 2; [4,6,3,0,5,2,1]; 
